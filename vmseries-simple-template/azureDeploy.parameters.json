@@ -81,17 +81,46 @@
             "metadata": {
                 "description": "SSH rsa public key file as a string."
             }
-        },
-        "vmSize": {
-            "type": "string",
-            "allowedValues": [
-                "Standard_D3",
-                "Standard_D4"
-            ],
-            "metadata": {
-                "description": "Azure VM size for VM-Series"
-            }
-        },
+    },
+    "vmSize": {
+       "type": "string",
+       "allowedValues": [
+          "Standard_D3",
+          "Standard_D4",
+          "Standard_D3_v2",
+          "Standard_D4_v2",
+          "Standard_A4",
+          "Standard_DS3_v2",
+          "Standard_DS4_v2"
+       ],
+       "metadata": {
+          "description": "Azure VM size for VM-Series"
+       },
+       "defaultValue": "Standard_D4_v2"
+    },
+    "imageVersion": {
+       "type": "string",
+       "allowedValues": [
+          "7.1.1",
+          "latest"
+       ],
+       "metadata": {
+          "description": "PAN OS Version"
+       },
+       "defaultValue": "7.1.1"
+    },
+    "imageSku": {
+       "type": "string",
+       "allowedValues": [
+          "byol",
+          "bundle1",
+          "bundle2"
+       ],
+       "metadata": {
+          "description": "Firewall License Model"
+       },
+       "defaultValue": "byol"
+    },
         "srcIPInboundNSG": {
             "type": "string",
             "metadata": {
