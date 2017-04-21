@@ -83,14 +83,44 @@
             }
         },
         "vmSize": {
-            "type": "string",
-            "allowedValues": [
-                "Standard_D3",
-                "Standard_D4"
-            ],
-            "metadata": {
-                "description": "Azure VM size for VM-Series"
-            }
+       "type": "string",
+       "allowedValues": [
+          "Standard_D3",
+          "Standard_D4",
+          "Standard_D3_v2",
+          "Standard_D4_v2",
+          "Standard_A4",
+          "Standard_DS3_v2",
+          "Standard_DS4_v2"
+       ],
+       "metadata": {
+          "description": "Azure VM size for VM-Series"
+       },
+       "defaultValue": "Standard_D3_v2"
+    },
+    "imageVersion": {
+       "type": "string",
+       "allowedValues": [
+          "7.1.1",
+          "latest"
+       ],
+       "metadata": {
+          "description": "PAN OS Version"
+       },
+       "defaultValue": "7.1.1"
+   },
+    "imageSku": {
+       "type": "string",
+       "allowedValues": [
+          "byol",
+          "bundle1",
+          "bundle2"
+       ],
+       "metadata": {
+          "description": "Firewall License Model"
+       },
+       "defaultValue": "byol"
+    },
         },
         "srcIPInboundNSG": {
             "type": "string",
@@ -186,8 +216,9 @@
     "variables": {
         "apiVersion": "2015-06-15",
         "imagePublisher": "paloaltonetworks",
-    	"imageSku" : "byol",
-	    "imageOffer" : "vmseries1",
+    	"imageSku" : "[parameters('imageSku')]",
+	"imageOffer" : "vmseries1",
+	"imageVersion": "[parameters('imageVersion')]",
         "fwpublicIPName": "[concat(parameters('vmName'), '-fwMgmtPublicIP')]",
         "nicName": "[concat(parameters('vmName'), '-eth')]",
         "FWPrivateIPAddressUntrust": "[parameters('subnet1StartAddress')]",
@@ -422,6 +453,9 @@
           },
           "imageOffer": {
             "value": "[variables('imageOffer')]"
+	  },
+          "imageVersion": {
+            "value": "[variables('imageVersion')]"
           },
           "imagePublisher": {
             "value": "[variables('imagePublisher')]"
